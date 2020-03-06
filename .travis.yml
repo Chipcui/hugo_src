@@ -1,0 +1,21 @@
+language: go
+
+install: go get -v github.com/gohugoio/hugo
+
+script:
+        - hugo
+                  
+deploy:
+        - cd ./public
+        - git config user.name "chipcui" # username替换为你的git username
+        - git config user.email "1210515929@qq.com" # email替换为你的coding邮箱
+        - git init
+        - git add .
+        - git commit -m "Travis-CI 自动部署"
+        # Coding Pages
+        - git push --force "https://chipcui:${CO_TOKEN}@${CO_REF}" master:master # username替换为你的coding用户名
+                                                
+env:
+        global:
+        # Coding Pages
+                - CO_REF: e.coding.net/chipcui/hugo.git
